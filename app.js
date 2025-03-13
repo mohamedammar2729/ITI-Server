@@ -44,7 +44,7 @@ app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL ||
-      "http://localhost:3000",
+        "https://mohamedammar2729.github.io/Fusha-Platform",
     ],
     credentials: true,
   })
