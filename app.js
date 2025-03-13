@@ -34,7 +34,7 @@ mongoose
   });
 /* ========================= app is considered as a server ============================== */
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 /* ====================================================================================== */
 // middleware use to parse the body of the request and store it in req.body
 app.use(express.urlencoded({ extended: true }));
@@ -48,6 +48,13 @@ app.use(
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Add a default route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'public.html'));
+});
 app.use("/api/user", userRouter); // use the user router
 app.use("/api/login", loginRouter); // use the login router
 app.use("/api/readyprogram", readyprogramRouter); // use the readyprogram router
