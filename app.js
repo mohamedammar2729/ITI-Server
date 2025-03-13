@@ -42,10 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   cors({
-    origin: [
-      process.env.FRONTEND_URL ||
-        "https://mohamedammar2729.github.io/Fusha-Platform",
-    ],
+    origin: [process.env.FRONTEND_URL || "https://mohamedammar2729.github.io"],
     credentials: true,
   })
 );
