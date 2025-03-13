@@ -42,9 +42,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   cors({
-    origin:
-      "http://localhost:3000/" ||
-      "https://iti-server-production.up.railway.app", // Replace with your frontend URL
+    origin: [
+      process.env.FRONTEND_URL ||
+      "http://localhost:3000",
+    ],
     credentials: true,
   })
 );
