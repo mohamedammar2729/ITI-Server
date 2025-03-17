@@ -40,9 +40,10 @@ const port = process.env.PORT || 3000;
 // middleware use to parse the body of the request and store it in req.body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// "https://mohamedammar2729.github.io"||
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL || "https://mohamedammar2729.github.io"||"http://localhost:3000"],
+    origin: [process.env.FRONTEND_URL || "http://localhost:3000"],
     credentials: true,
   })
 );
