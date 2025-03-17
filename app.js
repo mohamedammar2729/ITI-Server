@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL || "https://mohamedammar2729.github.io"],
+    origin: [process.env.FRONTEND_URL || "https://mohamedammar2729.github.io"||"http://localhost:3000"],
     credentials: true,
   })
 );
