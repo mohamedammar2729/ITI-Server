@@ -85,4 +85,19 @@ router.delete("/:id", createProgramValidator, async (req, res) => {
   }
 });
 
+// Add this route to your existing file
+
+// Get all program IDs (for static site generation)
+router.get("/all-ids", async (req, res) => {
+  try {
+    // Only fetch the _id field for efficiency
+    const programs = await createProgram.find({}, { _id: 1 });
+    const ids = programs.map((program) => program._id.toString());
+    res.json({ ids });
+  } catch (error) {
+    console.error("Error fetching program IDs:", error);
+    res.status(500).json({ error: "Failed to fetch program IDs" });
+  }
+});
+
 module.exports = router;
