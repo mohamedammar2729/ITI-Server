@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const tripPlacesSchema = new mongoose.Schema({
-  name:{
+  name: {
     type: String,
     required: true,
   },
@@ -21,6 +21,10 @@ const tripPlacesSchema = new mongoose.Schema({
     src: String,
   },
   category: {
+    type: String,
+    required: true,
+  },
+  city: {
     type: String,
     required: true,
   },

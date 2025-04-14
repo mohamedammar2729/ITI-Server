@@ -31,13 +31,14 @@ const sendResponse = async (res, user, state) => {
 router.post("/", async (req, res) => {
   try {
     const {email, password} = req.body;
-    console.log(email, password);
+
     let user = await User.findOne({ email}).select("+password");
     if (!user) {
       return res.status(404).send("Invalid email or password");
     }
 
     let validPassword = await bcrypt.compare(password, user.password);
+
     if (!validPassword) {
       return res.status(400).send("Invalid email or password...");
     }

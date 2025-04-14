@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-
-
-
+const mongoose = require("mongoose");
 
 const createProgramSchema = new mongoose.Schema({
   numberOfPersons: {
@@ -21,7 +18,7 @@ const createProgramSchema = new mongoose.Schema({
     required: true,
   },
   selectedTripPlaces: {
-    type: String,
+    type: Array,
     required: true,
   },
   images: {
@@ -29,7 +26,42 @@ const createProgramSchema = new mongoose.Schema({
     required: true,
   },
   register_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  selectedTripPlaces: { type: Array, required: true },
+
+  // New AI-generated trip fields (all optional)
+  schedule: {
+    type: Array,
+    required: false,
+  },
+  tips: {
+    type: Array,
+    required: false,
+  },
+  startDate: {
+    type: Date,
+    required: false,
+  },
+  endDate: {
+    type: Date,
+    required: false,
+  },
+  status: {
+    type: String,
+    required: false,
+    default: "upcoming",
+  },
+  isAIGenerated: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  metadata: {
+    type: Object,
+    required: false,
+  },
+  places: {
+    type: Array,
+    required: false,
+  },
 });
 
 exports.createProgram = mongoose.model("createProgram", createProgramSchema);

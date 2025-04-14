@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 const { createProgram } = require("../models/createprogramModel");
 
-
 const createProgramValidator = require("../middlewares/createprogramValidatorMW");
 
 router.post("/", createProgramValidator, async (req, res) => {
@@ -15,6 +14,15 @@ router.post("/", createProgramValidator, async (req, res) => {
       typeOfProgram,
       selectedTripPlaces,
       images,
+      // Add new optional fields
+      schedule,
+      tips,
+      startDate,
+      endDate,
+      status,
+      isAIGenerated,
+      metadata,
+      places,
     } = req.body;
 
     const newProgram = new createProgram({
@@ -25,6 +33,15 @@ router.post("/", createProgramValidator, async (req, res) => {
       typeOfProgram,
       selectedTripPlaces,
       images,
+      // Add new optional fields if they exist
+      ...(schedule && { schedule }),
+      ...(tips && { tips }),
+      ...(startDate && { startDate }),
+      ...(endDate && { endDate }),
+      ...(status && { status }),
+      ...(isAIGenerated && { isAIGenerated }),
+      ...(metadata && { metadata }),
+      ...(places && { places }),
     });
     await newProgram.save();
     res.status(201).json(newProgram);
@@ -42,9 +59,20 @@ router.get("/", createProgramValidator, async (req, res) => {
   }
 });
 
+router.get("/:id", createProgramValidator, async (req, res) => {
+  try {
+    const program = await createProgram.findOne({ _id: req.params.id });
+    if (program.register_id.toString() !== req.user.userid) {
+      return res.status(403).json({ error: "Access denied" });
+    }
+    res.json(program);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
 router.delete("/:id", createProgramValidator, async (req, res) => {
   try {
-
     const program = await createProgram.findOne({ _id: req.params.id });
     if (program.register_id.toString() !== req.user.userid) {
       return res.status(403).json({ error: "Access denied" });
