@@ -68,6 +68,7 @@ app.use("/api/avatar", avatarRouter); // use the home router
 app.use("/api/ai", aiRouter); // use the ai router
 app.use("/api/seller-places", sellerPlaceRouter); // use the sellerPlace router
 app.use("/api/admin", adminRouter); // Add this line
+app.use("/api/seller-places", sellerPlaceRouter);
 
 // Add a route handler for the root path
 app.get("/", (req, res) => {

@@ -269,4 +269,19 @@ router.get("/approved", async (req, res) => {
   }
 });
 
+// Add this new route to your existing file
+
+// Get all place IDs (for static site generation)
+router.get("/all-ids", async (req, res) => {
+  try {
+    // Only fetch the _id field for efficiency
+    const places = await SellerPlace.find({}, { _id: 1 });
+    const ids = places.map((place) => place._id.toString());
+    res.json({ ids });
+  } catch (error) {
+    console.error("Error fetching place IDs:", error);
+    res.status(500).json({ error: "Failed to fetch place IDs" });
+  }
+});
+
 module.exports = router;
