@@ -11,6 +11,7 @@ const cors = require("cors");
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const path = require("path"); // Add this line
 
 /* ======================================================================================= */
 
@@ -51,6 +52,11 @@ app.use(
 
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: "50mb" })); // Increase this limit too
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, "public")));
+
+// Define API routes
 app.use("/api/user", userRouter); // use the user router
 app.use("/api/login", loginRouter); // use the login router
 app.use("/api/readyprogram", readyprogramRouter); // use the readyprogram router
@@ -62,6 +68,29 @@ app.use("/api/avatar", avatarRouter); // use the home router
 app.use("/api/ai", aiRouter); // use the ai router
 app.use("/api/seller-places", sellerPlaceRouter); // use the sellerPlace router
 app.use("/api/admin", adminRouter); // Add this line
+
+// Add a route handler for the root path
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "public.html"));
+});
+
+// Add a route to check API status
+app.get("/api", (req, res) => {
+  res.json({
+    status: "success",
+    message: "API is running",
+    version: "1.0.0",
+  });
+});
+
+// Add a catch-all route handler for undefined routes
+app.use("*", (req, res) => {
+  res.status(404).json({
+    status: "error",
+    message: "Route not found",
+  });
+});
+
 /* ====================================================================================== */
 
 app.listen(port, () => {
