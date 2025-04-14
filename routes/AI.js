@@ -6,7 +6,7 @@ const { places } = require("../models/placesModel"); // Import the places model
 
 // Use environment variable instead of hardcoded token
 // Store this in your .env file
-const API_KEY = "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";
+const API_KEY = "API_TOKEN";
 
 // Available destinations from Create.jsx
 const AVAILABLE_DESTINATIONS = [
