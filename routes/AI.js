@@ -4,9 +4,10 @@ const fetch = require("node-fetch");
 const createProgramValidator = require("../middlewares/createprogramValidatorMW");
 const { places } = require("../models/placesModel"); // Import the places model
 
+require("dotenv").config();
 // Use environment variable instead of hardcoded token
 // Store this in your .env file
-const API_KEY = "API_TOKEN";
+const API_KEY = process.env.AZURE_OPENAI_API_KEY;
 
 // Available destinations from Create.jsx
 const AVAILABLE_DESTINATIONS = [
