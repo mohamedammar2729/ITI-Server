@@ -45,7 +45,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL || "https://mahmoudnewdom.github.io"],
+    origin: [process.env.FRONTEND_URL || "https://mohamedammar2729.github.io"],
     credentials: true,
   })
 );
